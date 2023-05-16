@@ -251,3 +251,6 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,maven,eclipse,intellij
+
+# Support Directories
+/src/main/resources/course-content/*
