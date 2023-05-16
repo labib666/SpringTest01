@@ -28,6 +28,13 @@ public class GuestService {
             guestDTO.setPhoneNumber(guest.getPhoneNumber());
             guestDTOs.add(guestDTO);
         });
+        guestDTOs.sort((GuestDTO o1, GuestDTO o2) -> {
+            if (o1.getLastName().equals(o2.getLastName())) {
+                return o1.getFirstName().compareTo(o2.getFirstName());
+            } else {
+                return o1.getLastName().compareTo(o2.getLastName());
+            }
+        });
         return guestDTOs;
     }
 }
