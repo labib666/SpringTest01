@@ -3,6 +3,7 @@ package com.example.SpringTest01.utils;
 import com.example.SpringTest01.repositories.GuestRepository;
 import com.example.SpringTest01.repositories.ReservationRepository;
 import com.example.SpringTest01.repositories.RoomRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.data.repository.CrudRepository;
@@ -15,6 +16,7 @@ public class AppStartupEvent implements ApplicationListener<ApplicationReadyEven
     private final GuestRepository guestRepository;
     private final ReservationRepository reservationRepository;
 
+    @Autowired
     public AppStartupEvent(RoomRepository roomRepository, GuestRepository guestRepository, ReservationRepository reservationRepository) {
         this.roomRepository = roomRepository;
         this.guestRepository = guestRepository;
