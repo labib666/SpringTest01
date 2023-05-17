@@ -1,6 +1,5 @@
 package com.example.SpringTest01.services;
 
-import com.example.SpringTest01.dtos.RoomDTO;
 import com.example.SpringTest01.models.Room;
 import com.example.SpringTest01.repositories.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,24 +17,17 @@ public class RoomService {
         this.roomRepository = roomRepository;
     }
 
-    public List<RoomDTO> getAllRooms() {
-        Iterable<Room> rooms = this.roomRepository.findAll();
-        List<RoomDTO> roomDTOs = new ArrayList<>();
-        rooms.forEach(guest -> {
-            RoomDTO roomDTO = new RoomDTO();
-            roomDTO.setName(guest.getName());
-            roomDTO.setRoomNumber(guest.getRoomNumber());
-            roomDTO.setBedInfo(guest.getBedInfo());
-            roomDTOs.add(roomDTO);
-        });
-        roomDTOs.sort((RoomDTO o1, RoomDTO o2) -> {
+    public List<Room> getAllRooms() {
+        List<Room> rooms = new ArrayList<>();
+        this.roomRepository.findAll().forEach(rooms::add);
+        rooms.sort((Room o1, Room o2) -> {
             if (o1.getName().equals(o2.getName())) {
                 return o1.getRoomNumber().compareTo(o2.getRoomNumber());
             } else {
                 return o1.getName().compareTo(o2.getName());
             }
         });
-        return roomDTOs;
+        return rooms;
     }
 }
 

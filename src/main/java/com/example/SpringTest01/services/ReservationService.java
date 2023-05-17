@@ -47,6 +47,7 @@ public class ReservationService {
             reservationDTO.setFirstName(guest.getFirstName());
             reservationDTO.setLastName(guest.getLastName());
             reservationDTO.setGuestId(guest.getGuestId());
+            reservationDTO.setReservationId(reservation.getReservationId());
         });
         List<ReservationDTO> reservationDTOs = new ArrayList<>();
         for (Long id : reservationMap.keySet()) {

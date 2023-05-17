@@ -1,6 +1,6 @@
 package com.example.SpringTest01.controllers;
 
-import com.example.SpringTest01.dtos.GuestDTO;
+import com.example.SpringTest01.models.Guest;
 import com.example.SpringTest01.services.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class GuestController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String getGuests(Model model) {
-        List<GuestDTO> guests = this.guestService.getAllGuests();
+        List<Guest> guests = this.guestService.getAllGuests();
         model.addAttribute("guests", guests);
         return "guests";
     }

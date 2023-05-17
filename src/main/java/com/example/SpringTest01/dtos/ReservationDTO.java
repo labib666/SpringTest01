@@ -3,6 +3,7 @@ package com.example.SpringTest01.dtos;
 import java.util.Date;
 
 public class ReservationDTO {
+    private long reservationId;
     private long roomId;
     private long guestId;
     private String roomName;
@@ -10,6 +11,14 @@ public class ReservationDTO {
     private String firstName;
     private String lastName;
     private Date date;
+
+    public long getReservationId() {
+        return reservationId;
+    }
+
+    public void setReservationId(long reservationId) {
+        this.reservationId = reservationId;
+    }
 
     public long getRoomId() {
         return roomId;
@@ -69,8 +78,9 @@ public class ReservationDTO {
 
     @Override
     public String toString() {
-        return "RoomReservation{" +
-                "roomId=" + roomId +
+        return "ReservationDTO{" +
+                "reservationId=" + reservationId +
+                ", roomId=" + roomId +
                 ", guestId=" + guestId +
                 ", roomName='" + roomName + '\'' +
                 ", roomNumber='" + roomNumber + '\'' +

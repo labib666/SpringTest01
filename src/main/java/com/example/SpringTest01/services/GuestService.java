@@ -1,6 +1,5 @@
 package com.example.SpringTest01.services;
 
-import com.example.SpringTest01.dtos.GuestDTO;
 import com.example.SpringTest01.models.Guest;
 import com.example.SpringTest01.repositories.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,25 +16,28 @@ public class GuestService {
         this.guestRepository = guestRepository;
     }
 
-    public List<GuestDTO> getAllGuests() {
-        Iterable<Guest> guests = this.guestRepository.findAll();
-        List<GuestDTO> guestDTOs = new ArrayList<>();
-        guests.forEach(guest -> {
-            GuestDTO guestDTO = new GuestDTO();
-            guestDTO.setLastName(guest.getLastName());
-            guestDTO.setFirstName(guest.getFirstName());
-            guestDTO.setEmailAddress(guest.getEmailAddress());
-            guestDTO.setPhoneNumber(guest.getPhoneNumber());
-            guestDTOs.add(guestDTO);
-        });
-        guestDTOs.sort((GuestDTO o1, GuestDTO o2) -> {
+    public List<Guest> getAllGuests() {
+        List<Guest> guests = new ArrayList<>();
+        this.guestRepository.findAll().forEach(guests::add);
+        guests.sort((Guest o1, Guest o2) -> {
             if (o1.getLastName().equals(o2.getLastName())) {
                 return o1.getFirstName().compareTo(o2.getFirstName());
             } else {
                 return o1.getLastName().compareTo(o2.getLastName());
             }
         });
-        return guestDTOs;
+        return guests;
+    }
+
+    public Optional<Guest> createGuest(Guest guest) {
+        System.out.println("Create " + guest);
+        Optional<Guest> persistedGuest = Optional.empty();
+        try {
+            persistedGuest = Optional.of(this.guestRepository.save(guest));
+        } catch(Exception e) {
+            System.out.println("DB Error: " + e.getMessage());
+        }
+        return persistedGuest;
     }
 }
 
